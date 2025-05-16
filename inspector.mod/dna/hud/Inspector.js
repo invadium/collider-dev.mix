@@ -12,12 +12,12 @@ const explorerDefaults = {
 }
 
 function Inspector(st) {
-    this.name = 'inspector'
-    this.layoutMode = 0
-    this.panelMode = 3
-    this.panel = []
-
-    Container.call(this, st)
+    Container.call(this, augment({
+        name:       'inspector',
+        layoutMode:  0,
+        panelMode:   3,
+        panel:       [],
+    }, st))
 }
 Inspector.prototype = Object.create(Container.prototype)
 
