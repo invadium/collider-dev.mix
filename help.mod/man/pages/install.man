@@ -21,7 +21,7 @@ from npm repositories.
 You can also install the latest stable
 release from the github repo:
 
-    npm install -g https://github.com/invider/collider.jam.git
+    npm install -g https://github.com/invadium/collider.jam.git
 
 That would include the latest features.
 

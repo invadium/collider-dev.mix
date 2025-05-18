@@ -18,7 +18,7 @@ a single asset - an image of a planet.
 Place a planet image inside the _res_ folder.
 
 You can get one on
-[GitHub](https://github.com/invider/procedural-november.pak/tree/main/planets), from
+[GitHub](https://github.com/invadium/procedural-november.pak/tree/main/planets), from
 [Open Game Art](https://opengameart.org/content/mars-type-planet),
 or find any other planet image with a transparent background.
 
@@ -70,11 +70,11 @@ since they are part of the _lab_ node.
 
 
 The source for this example is available
-at <a href="https://github.com/invider/bits.mix/blob/master/planet.mod/lab.js">bits.mix/planet.mod/lab.js</a>.
+at <a href="https://github.com/invadium/bits.mix/blob/master/planet.mod/lab.js">bits.mix/planet.mod/lab.js</a>.
 
 To run it, clone the _bits.mix_ repository:
 
-    git clone https://github.com/invider/bits.mix
+    git clone https://github.com/invadium/bits.mix
 
 Then, run _Collider.JAM_ inside the _planet.mod_ folder:
 

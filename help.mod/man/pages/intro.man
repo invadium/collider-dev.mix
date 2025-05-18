@@ -22,7 +22,7 @@ tags: jam, intro, start, begin, beginner, preface, home
 | [setup](#./setup)
 ----
 [collider.land](http://collider.land)
-| [github](https://github.com/invider/collider.jam)
+| [github](https://github.com/invadium/collider.jam)
 | [jamming card](http://collider.land/data/jamming-card.pdf)
 | [blog](http://ikhotin.com/posts/)
 | [discord](https://discord.gg/kxNnHc2)
@@ -71,7 +71,7 @@ And [Start Jamming](#.start-jamming).
 <hr>
 
 <div style="font-size: 110%;">
-[Source Code](https://github.com/invider/collider.jam)
+[Source Code](https://github.com/invadium/collider.jam)
 | [Jamming Card](http://collider.land/data/jamming-card.pdf)
 | [Collider.JAM](http://collider.land)
 | [Collider Labs](http://colliderlabs.com)

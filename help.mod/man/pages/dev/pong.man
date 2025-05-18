@@ -575,7 +575,7 @@ It just traps the new game event.
 
 
 Full source code is
-[available on GitHub](https://github.com/invider/pong-ce.mod).
+[available on GitHub](https://github.com/invadium/pong-ce.mod).
 
 
 
