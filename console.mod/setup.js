@@ -17,6 +17,7 @@ function getGlobal(name) {
 }
 
 module.exports = function setup() {
+    _.hide()
 
     const hud = lab.spawn('hud/Hud', {
         'name': 'hud'
