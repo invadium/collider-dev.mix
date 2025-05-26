@@ -1,10 +1,11 @@
 -------------------------------------------------------------------
 /sys/Frame
 tags: core
-head: a group node
+head: a basic group node
 details:
-Frame constructs a basic node container
-to manage node collections.
+A class that represents a basic group node
+on the scene graph.
+Use it to manage node collections.
 
 Named nodes (the ones with 'name' property defined)
 are stored in a directory *[_dir]* object.
@@ -14,9 +15,9 @@ All nodes can be accessed by index in *[_ls]*.
 The named nodes have direct shortcuts
 in the Frame object, so can be accessed
 directly from the frame node as *node.childName*.
-However, to list named nodes use ._dir,
+However, to list named nodes use .__dir,
 since the Frame object itself has a bunch
-of service fields like __, attach(), detach() etc...
+of service fields like ____, attach(), detach() etc...
 
 -------------------------------------------------------------------
 /sys/Frame._frame
@@ -66,7 +67,7 @@ details:
 When _name_ is not specified, tries to take it from the object itself.
 
 -------------------------------------------------------------------
-/sys/Frame/prototype/onAttached
+/sys/Frame/prototype/onAttach
 head: a service method to propagate attach notifications
 types:
 @param {value} [node] - optional attached node (empty for the attached node itself)
@@ -120,6 +121,10 @@ head: detach all nodes
 head: detach a node by name
 types:
 @param {string} name - node's name
+
+-------------------------------------------------------------------
+/sys/Frame/prototype/detachSelf
+head: detach this node from the parent (the same as _this.____.detach(this)_)
 
 -------------------------------------------------------------------
 /sys/Frame/prototype/apply
@@ -242,7 +247,8 @@ types:
 @param {value} initVal - a start value, first node by default
 
 -------------------------------------------------------------------
-/sys/Frame/prototype/kill
-head: kill the node and all the childs
--------------------------------------------------------------------
+/sys/Frame/prototype/supplement
+head: custom action used by supplement() to properly supplement from other frames
+types:
+@param {object} src - the source object to supplement from
 
