@@ -1,4 +1,4 @@
-function postSetup() {
+function postSetup(e) {
     _.job.helper.report()
 
     _$.mod.console.cmd.attach(_.cmd.sync)
@@ -9,6 +9,9 @@ function postSetup() {
             let postfix = ''
             if (isString(manTopic)) {
                 postfix = `#${encodeURIComponent(manTopic)}`
+                log(`opening help for: [${manTopic}]...`)
+            } else {
+                log('opening help...')
             }
             window.open(`collider-dev.mix/help.html${postfix}`, '_blank')
         }, 3)
