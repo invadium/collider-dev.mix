@@ -4,7 +4,9 @@ import { md2html } from './markdown.js'
 import { parentPath } from './util.js'
 
 function metaTag(meta) {
-    let res = `<div class="tag" onclick="location.href='#.${meta.path}';">`
+    //let res = `<div class="tag" onclick="location.href='#.${meta.path}';">`
+    const id = `tag::${meta.path}`
+    let res = `<div id="${id}" class="tag" onclick="trap.onMetaTagClick('${id}');">`
 
     let path = parentPath(meta.path)
     if (meta.kind === 'page' || !path) path = ''

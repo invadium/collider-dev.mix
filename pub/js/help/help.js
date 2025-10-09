@@ -5,6 +5,8 @@ import { toHtml, preformat } from './format.js'
 import { cache } from './cache.js'
 import { find } from './filter.js'
 import { clear, render, wrapHtml, download, loadConfig, saveConfig } from './util.js'
+import { trap } from './trap.js'
+
 
 const HELP_DATA_URL = '../help/data'
 
@@ -388,5 +390,7 @@ window.onkeydown = function(e) {
         }
     }
 }
+
+window.trap = trap
 
 boot()

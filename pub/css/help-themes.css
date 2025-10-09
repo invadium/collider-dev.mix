@@ -26,7 +26,8 @@
     --tags-hover-color:     #d4c26c;
     --tags-active-color:    #cf9a61;
 
-    --tag-hover-background: #505050;
+    --tag-hover-background:    #505050;
+    --tag-selected-background: #2a3140;
 
     --meta-color:           #111213;
     --meta-background:      #fffcd1;
@@ -99,8 +100,9 @@
     --search-field-background-color:  #073642;
     --search-field-placeholder-color: #586e75;
 
-    --tags-panel-background: #002b36;
-    --tag-hover-background:  #073642;
+    --tags-panel-background:   #002b36;
+    --tag-selected-background: #183a43;
+    --tag-hover-background:    #073642;
 
     --meta-color:           #657b83; /* base0  */
     --meta-background:      #002b36; /* base03 */

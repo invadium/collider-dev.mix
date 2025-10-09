@@ -135,6 +135,13 @@ mark {
     background: var(--tag-hover-background);
 }
 
+.tag-selected {
+    background: var(--tag-selected-background);
+}
+.tag-selected:hover {
+    background: var(--tag-hover-background);
+}
+
 .tagLink {
     text-decoration: none;
 }
