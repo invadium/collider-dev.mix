@@ -3,14 +3,16 @@
 module.exports = function(e) {
     if (e.repeat) return
 
-    if (_.hidden) {
-        _.hidden = false
+    if (__$.hidden) {
+        // __$.hidden = false
+        __$.show()
 
         if (lab.hud._ls.length < 2) {
             trap('explore')
         }
 
     } else {
-        _.hidden = true
+        // __$.hidden = true
+        __$.hide()
     }
 }

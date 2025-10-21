@@ -98,14 +98,14 @@ function normalizeIgnoreRules(ignore) {
 
 
 function report() {
-    if (!_$.env.config.debug) return
+    if (!$.env.config.debug) return
 
     lib.fixMeta()
 
     let ignore = collectIgnoreRules($, [])
     ignore = normalizeIgnoreRules(ignore)
 
-    if (_$.env.config.dynamic) {
+    if ($.env.config.dynamic) {
         doReport(ignore)
     } else {
         log.warn('ignoring metadata report - not in dynamic mode')

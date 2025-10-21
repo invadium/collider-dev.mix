@@ -3,7 +3,7 @@
 module.exports = function(e) {
     if (e.repeat) return
 
-    if (_.hidden) {
+    if (__$.hidden) {
         lib.control.show()
     } else {
         lib.control.hide()

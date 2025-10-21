@@ -1,23 +1,23 @@
 'use strict'
 
 function getLocal(name) {
-    if (!isFrame(_.cmd)) return
+    if (!isFrame(__$.cmd)) return
 
-    const fn = _.cmd._dir[name]
+    const fn = __$.cmd._dir[name]
     if (!isFun(fn)) return
     return fn
 }
 
 function getGlobal(name) {
-    if (!isFrame(_$.cmd)) return
+    if (!isFrame($.cmd)) return
 
-    const fn = _$.cmd._dir[name]
+    const fn = $.cmd._dir[name]
     if (!isFun(fn)) return
     return fn
 }
 
 module.exports = function setup() {
-    _.hide()
+    __$.hide()
 
     const hud = lab.spawn('hud/Hud', {
         'name': 'hud'
@@ -28,7 +28,7 @@ module.exports = function setup() {
         name: 'console',
         x: 0,
         y: 0,
-        cur: _$,
+        cur: $,
 
         adjust: function() {
             this.w = ctx.width
@@ -37,16 +37,16 @@ module.exports = function setup() {
     })
 
     function print(msg) {
-        if (_.env.logToConsole) con.print(msg)
+        if (__$.env.logToConsole) con.print(msg)
     }
 
     // bind log functions to out console
-    _.env.logToConsole = true
-    sys.after(_$.log, 'debug', (msg, more) => print('# ' + msg + (more? more : '')))
-    sys.after(_$.log, 'out', (msg, more) => print(msg +(more? more: '' )))
-    sys.after(_$.log, 'warn', (msg, more) => print('? ' + msg + (more? more : '')))
-    sys.after(_$.log, 'err', (msg, more) => print('! ' + msg + (more? more : '')))
-    sys.after(_$.log, 'dump', (obj) => { print(obj) })
+    __$.env.logToConsole = true
+    sys.after($.log, 'debug', (msg, more) => print('# ' + msg + (more? more : '')))
+    sys.after($.log, 'out', (msg, more) => print(msg +(more? more: '' )))
+    sys.after($.log, 'warn', (msg, more) => print('? ' + msg + (more? more : '')))
+    sys.after($.log, 'err', (msg, more) => print('! ' + msg + (more? more : '')))
+    sys.after($.log, 'dump', (obj) => { print(obj) })
 
     // define command processing
     con.onCommand = function(cmd) {

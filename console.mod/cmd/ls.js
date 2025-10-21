@@ -6,11 +6,11 @@ function ls(args, line, con) {
 
     let nodes
     if(!isString(path)) {
-        if (!con.cur || !con.cur._ls) con.cur = _$
+        if (!con.cur || !con.cur._ls) con.cur = $
         nodes = con.cur._ls
 
     } else {
-        nodes = _$.select(path)
+        nodes = $.select(path)
         if (nodes.length === 1 && nodes[0]._ls) nodes = nodes[0]._ls
     }
 

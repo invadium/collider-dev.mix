@@ -1,5 +1,5 @@
 function setup() {
-    _.hide()
+    __$.hide()
     
     const hud = lab.spawn('hud/Hud', {
         name: 'hud',

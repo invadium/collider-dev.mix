@@ -1,15 +1,15 @@
 // show console
 function show() {
-    _.disableOthers()
-    _.show()
+    __$.disableOthers()
+    __$.show()
     lab.hud.captureFocus(lab.hud.console)
     lab.hud.console.show()
 }
 
 // hide console
 function hide() {
-    _.enableOthers()
+    __$.enableOthers()
     lab.hud.releaseFocus(lab.hud.console)
     lab.hud.console.hide()
-    _.hide()
+    __$.hide()
 }

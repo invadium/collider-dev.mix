@@ -365,7 +365,7 @@ In Collider.JAM you can say:
 
 Many simple operations are just straighforward calls
 to functions or direct access to mod nodes in scope,
-like res, dna, lab, trap,  _ (current mod), _$ (root mod) etc.
+like res, dna, lab, trap,  __$ (current mod), $ (the scene/root mod) etc.
 
 That voodoo magic is possible because of the clever
 tricks Collider.JAM performs while loading the mix.

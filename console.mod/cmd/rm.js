@@ -6,7 +6,7 @@ function rm(args, line, con) {
         con.print('expecting <path> argument')
         return
     }
-    const nodes = _$.select(path)
+    const nodes = $.select(path)
     nodes.forEach(n => {
         if (sys.isFrame(n.__)) {
             if (n.name) {

@@ -6,8 +6,8 @@ function killNode(args, line, con) {
         con.print('expecting <path> argument')
         return
     }
-    let nodes = _$.select(path)
-    if (nodes.length === 0) nodes = _$.select('lab/' + path)
+    let nodes = $.select(path)
+    if (nodes.length === 0) nodes = $.select('lab/' + path)
 
     let out = ''
     nodes.forEach(n => {

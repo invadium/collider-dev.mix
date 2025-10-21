@@ -1,10 +1,10 @@
 function postSetup(e) {
-    _.job.helper.report()
+    __$.job.helper.report()
 
-    _$.mod.console.cmd.attach(_.cmd.sync)
+    $.mod.console.cmd.attach(__$.cmd.sync)
 
-    if (_$.env.config && _$.env.config.man) {
-        const manTopic = _$.env.config.man
+    if ($.env.config && $.env.config.man) {
+        const manTopic = $.env.config.man
         defer(() => {
             let postfix = ''
             if (isString(manTopic)) {

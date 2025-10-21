@@ -6,16 +6,16 @@ function cd(args, line, con) {
 
     let node
     if(!isString(path)) {
-        con.cur = _$
+        con.cur = $
 
     } else {
 
         if (path === '..') {
             if (con.cur.__) con.cur = con.cur.__
         } else if (path === '/') {
-            con.cur = _$
+            con.cur = $
         } else if (path.startsWith('/')) {
-            node = _$.selectOne(path)
+            node = $.selectOne(path)
             if (node && node._ls) con.cur = node
             else con.print(`can't cd into [${path}]`)
         } else {

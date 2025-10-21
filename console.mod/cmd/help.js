@@ -4,8 +4,8 @@ function help(args, line, con) {
     con.print('available console commands:')
 
     // list commands declared in global scope
-    if (sys.isFrame(_$.cmd)) {
-        const dir = _$.cmd._dir
+    if (sys.isFrame($.cmd)) {
+        const dir = $.cmd._dir
         Object.keys(dir).forEach(name => {
             const fn = dir[name]
             if (sys.isFun(fn)) {
@@ -17,8 +17,8 @@ function help(args, line, con) {
     }
 
     // list local commands declared in console.mod
-    if (sys.isFrame(_.cmd)) {
-        const dir = _.cmd._dir
+    if (sys.isFrame(__$.cmd)) {
+        const dir = __$.cmd._dir
         Object.keys(dir).forEach(name => {
             const fn = dir[name]
             if (sys.isFun(fn)) {

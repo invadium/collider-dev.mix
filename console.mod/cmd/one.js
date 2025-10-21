@@ -6,7 +6,7 @@ function one(args, line, con) {
         con.print('expecting <path> argument')
         return
     }
-    const node = _$.selectOne(path)
+    const node = $.selectOne(path)
 
     log.dump(node)
 }

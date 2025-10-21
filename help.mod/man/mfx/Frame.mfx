@@ -181,11 +181,11 @@ String predicates are in path format and can include special characters:
 
 Some usage examples:
 
-    _$.select('/res/sfx/*')          // select all sound effects in sfx
+    $.select('/res/sfx/*')           // select all sound effects in sfx
     dna.select('hud/Window')         // select hud.Window
     lab.hud.select('~Window')        // select all instances of dna.hud.Window in lab.hud
-    lab.hud.select('panelA/~Window') //  select all instances of dna.hud.Window under panelA
-    lab.select('&hero')              //select from lab all nodes with name === 'hero'
+    lab.hud.select('panelA/~Window') // select all instances of dna.hud.Window under panelA
+    lab.select('&hero')              // select from lab all nodes with name === 'hero'
 
 -------------------------------------------------------------------
 /sys/Frame/prototype/selectOne

@@ -1,5 +1,5 @@
 function sync(args, line, con) {
-    _.job.helper.report()
+    __$.job.helper.report()
 }
 
 sync.info = 'sync metadata'

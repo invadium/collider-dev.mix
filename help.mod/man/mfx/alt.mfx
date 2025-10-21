@@ -77,7 +77,7 @@ types:
     @param {object} obj1 - a first object to copy values from into the target
     @param ... - additional optional object for target augmentation
 details:
-Properties with names *_*, *__*, *___*, *_$* are ignored,
+Properties with names *__*, *__$*, *_$* are ignored,
 since can cause a cycle.
 
 No other properties that can cause a cycle should be
@@ -96,7 +96,7 @@ This is it's main difference with
 <a href="./alt/augment">augment(target, obj1, ...)</a>,
 which replaces already existing values.
 
-Properties with names *_*, *__*, *___*, *_$* are ignored,
+Properties with names *__*, *__$*, *_$* are ignored,
 since can cause a cycle.
 
 No other properties that can cause a cycle should be
@@ -350,7 +350,7 @@ Essentially, a more convenient way to run trap in the global context.
 
 Synonimous of running:
 
-    _$.trap()
+    $.trap()
 
 
 -------------------------------------------------------------------

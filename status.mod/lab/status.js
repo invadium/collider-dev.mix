@@ -2,7 +2,7 @@
 
 return {
     Z: 101,
-    hidden: true,
+    hidden: false,
 
     lineSpacing: 32,
     font: '24px moon',
@@ -41,9 +41,9 @@ return {
         y = ctx.height - 20
         let hshift = 0
 
-        if (_$.env.statusInfo) {
-            Object.keys(_$.env.statusInfo).forEach(key => {
-                ctx.fillText(key + ': ' + _$.env.statusInfo[key], x, y - hshift)
+        if ($.env.statusInfo) {
+            Object.keys($.env.statusInfo).forEach(key => {
+                ctx.fillText(key + ': ' + $.env.statusInfo[key], x, y - hshift)
                 hshift += this.lineSpacing
             })
         }

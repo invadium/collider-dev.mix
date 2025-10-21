@@ -13,8 +13,8 @@ function extractState(e) {
 }
 
 function restoreExplorer(st) {
-    const target = _$.selectOne(st.path)
-    if (!target) target = _$
+    const target = $.selectOne(st.path)
+    if (!target) target = $
     const explorer = lab.hud.spawn('hud/gadget/Explorer', {
         x: st.x,
         y: st.y,
@@ -37,7 +37,7 @@ function loadState() {
 }
 
 module.exports = function setup() {
-    _.hidden = true
+    __$.hidden = true
 
     const hud = lab.spawn('hud/Hud', {
         name: 'hud',
@@ -65,7 +65,7 @@ module.exports = function setup() {
 
         onClick: function() {
             const state = lab.hud._ls
-                .filter(e => e instanceof _$.dna.hud.gadget.Explorer)
+                .filter(e => e instanceof $.dna.hud.gadget.Explorer)
                 .map(e => extractState(e))
 
             log.dump(state)
