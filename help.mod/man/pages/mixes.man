@@ -20,7 +20,7 @@ and samples created with Collider.JAM:
     - <a href="https://github.com/invadium/game-of-life.mod">Game of Life</a> - Conway's Game of Life implementation. 
     - <a href="https://github.com/invadium/pong-pe.mod">Pong</a> - a classic arcade game implementation.
     <hr>
-    - <a href="https://github.com/invadium/enceladus-dockyards.mix">Enceladus Dockyards</a> - a space ship building and tactical battle simulator created for GameBoy Jam 8.
+    - <a href="https://github.com/invadium/enceladus-dockyards-boy.mix">Enceladus Dockyards Boy</a> - a space ship building and tactical battle simulator created for GameBoy Jam 8.
     - <a href="https://github.com/invadium/station-keeping.mod">Station Keeping</a> - a local multipayer co-op space station trading and survival from Ludum Dare 46.
     - <a href="https://github.com/invadium/cosmic-rays-n-dnas.mod">Cosmic Rays'n DNAs</a> - arcade from Global Game Jam 2020.
     - <a href="https://github.com/invadium/300-hearts-for-escape">300 Hearts for Escape</a> - Ludum Dare 44 Entry

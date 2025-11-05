@@ -2,47 +2,58 @@ name: Getting Started
 order: 102
 ---------------------
 
-Thank you for <a href="#.install">downloading</a> _Collider.JAM_!
+Thank you for <a href="#.install">installing</a> _Collider.JAM_!
 
-Now you can create your first *mod*.
+Now you can create your first _Collider.JAM_ project.
+The simplest one is called a *mod*.
+We are not diving into details here, but naming and structure are super-important in Collider.JAM, so at the start, follow the suggested naming to the letter.
 
 Let's visualize a bouncing planet.
 
 Create a new folder named _planet.mod_ - this is going
 to be a home of our Collider.JAM project.
+The ".mod" extension is crucial, since that is how the framework
+detects the root of the project.
 
-Next, create a folder named _res_ inside.
-It is going to keep our assets or more precisely,
-a single asset - an image of a planet.
+First, we need to find a suitable picture of a planet.
 
-Place a planet image inside the _res_ folder.
-
-You can get one on
-[GitHub](https://github.com/invadium/procedural-november.pak/tree/main/planets), from
+You can get one at
+[GitHub](https://github.com/invadium/procedural-november.pak/tree/main/planets), or from
 [Open Game Art](https://opengameart.org/content/mars-type-planet),
 or find any other planet image with a transparent background.
+
+Download the image, rename it to _planet.png_ 
+or _planet.jpeg_/_planet.jpg_ if that is an JPEG image),
+and place it in the folder named _res_ inside your _planet.mod_.
+
+That folder is going to hold our assets.
 
 Now, create a file _planet.mod/lab.js_:
 
 ```
+    // ===================
     // planet.mod/lab.js
+    // ===================
 
     // position at the center of the screen
-    let x = rx(.5)  // place at 50% of the screen width
+    let x = rx(.5) // place at 50% of the screen width
     let y = ry(.5)  // place at 50% of the screen height
-    let r = 50      // planet radius in pixels
+    let a = 0 // planet angle in radians
+    let r = 50 // planet radius in pixels
 
-    let dx = 100 // x-axis speed component
-    let dy = 100 // y-axis speed component
+    let dx = 100   // x-axis speed component
+    let dy = 100   // y-axis speed component
 
     function init() {
         this.background = '#000000' // black color in hex RGB
     }
 
     function evo(dt) {
-       // make the movement factored by the delta time dt
+       // move the planet coordinates factored by the provided delta time dt
        x += dx * dt
        y += dy * dt
+       // rotate the planet 45 degrees per second counterclockwise
+       a -= .25 * PI * dt
 
        // bounce from the screen edges
        if (x > rx(1)-r && dx > 0) dx *= -1
@@ -52,21 +63,42 @@ Now, create a file _planet.mod/lab.js_:
     }
 
     function draw() {
-       // planet
-       lineWidth(5)
-       stroke(.58, .5, .7)   // color in float HSL
-       circle(x, y, r)       // atmosphere haze
-       image(res.mars_type_planet, x-r, y-r, 2*r, 2*r)
+        // we MUST save the drawing context before any transformation
+        // and then translate to the planet coordinates and rotate on planet angle
+        save().translate(x, y).rotate(a)
+
+        // set the line width and color in float HSL format
+        lineWidth(5).stroke(.58, .5, .7)
+
+        // atmosphere haze
+        circle(0, 0, r)
+
+        // draw the planet image
+        image(res.planet, -r, -r, 2*r, 2*r)
+
+        // MUST restore the drawing context
+        restore()
     }
 ```
 
-That is all you need to have a bouncing planet on the screen.
+That is all you need to see a bouncing planet.
+
+Open the _planet.mod_ folder in a command console and type:
+
+```
+jam play
+```
+
+_Collider.JAM_ is going to scan the folder for sources and resources, start the server at port 9999, and open [http://localhost:9999](http://localhost:9999) in the default web browser.
 
 Functions _draw()_ and _evo(dt)_ are going
 to be evaluated in the main game loop,
 since they are part of the _lab_ node.
 
 *Any object with _draw()_ and _evo()_ in the _lab_ is alive.*
+
+Provided resources are loaded and mapped to the scene graph automatically, so you can easily access the planet image simply as _res.planet_ (given that the image file was named "planet.png" or "planet.jpeg" - the name will match the filename).
+No _loads_ or _imports_ are needed here.
 
 
 The source for this example is available
@@ -84,4 +116,14 @@ Then, run _Collider.JAM_ inside the _planet.mod_ folder:
 
 And open the browser at
 [http://localhost:9999](http://localhost:9999)
+
+Explore other examples in _bits.mix_ and other [mixes](#.mixes).
+
+
+
+
+
+
+
+
 
