@@ -1,6 +1,6 @@
 :root {
     --body-background:       #ffffff;
-    --body-font-family:      serif;
+    --body-font-family:      nunito, serif;
     --body-font-size:        100%;
 
     --hr-border-color:       #ffffff;
@@ -19,7 +19,7 @@
     --search-field-color:             #404040;
     --search-field-background-color:  #ffffff;
     --search-field-placeholder-color: #808080;
-    --search-field-font-family:       serif;
+    --search-field-font-family:       nunito, serif;
 
     --tags-link-color:      #bd8c37;
     --tags-visited-color:   #bd8c37;
@@ -41,7 +41,6 @@
     --path-color:           #505050;
     --path-font-family:     mono-code;
 
-    // right panel style
     --page-title-color:       #166470;
     --page-title-font-size:   36px;
     --page-title-font-family: header;

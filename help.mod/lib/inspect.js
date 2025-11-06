@@ -171,6 +171,36 @@ function inspect(node, parent, name, path, cache, parentMeta, modMeta, level) {
 
             if (isEmpty(meta.dir)) delete meta.dir
             if (isEmpty(meta.idir)) delete meta.idir
+        } else {
+            const refinements = Object.keys(usageRefinements).length
+            if (refinements > 0) {
+                meta.api = true
+                meta.kind = 'Functional Node'
+                meta.data = node._meta
+                meta.dir = meta.dir || {}
+                Object.keys(node).forEach(k => {
+                    if (k.startsWith('_')) return
+
+                    const next = node[k]
+                    if (cache.node.indexOf(next) < 0) {
+                        const submeta = inspect(next, node, k, meta.path,
+                            cache, meta, modMeta, 0)
+                        if (submeta) {
+                            meta.dir[k] = submeta
+                        }
+
+                    } else {
+                        return
+                        /*
+                        meta.dir[k] = {
+                            name: k,
+                            'class': typeof next,
+                            title: 'circular',
+                        }
+                        */
+                    }
+                })
+            }
         }
 
         // TODO do we really have a use case for source here?

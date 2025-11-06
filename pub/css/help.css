@@ -1,4 +1,12 @@
 @font-face {
+    font-family: 'nunito';
+    src: URL('../font/Nunito.ttf');
+}
+@font-face {
+    font-family: 'nunito-italic';
+    src: URL('../font/Nunito-Italic.ttf');
+}
+@font-face {
     font-family: 'mono-code';
     src: URL('../font/JetBrainsMono-Regular.ttf');
 }
