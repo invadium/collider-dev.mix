@@ -305,15 +305,16 @@ types:
 -------------------------------------------------------------------
 /alt/kill
 head: kill a node
-usage: (node)
+usage: (node, st)
 types:
-    @param {Node} node - a mix node to kill
+    @param {Node} node - the node to kill
+    @param {Object} st - the kill state to pass around, typically - the killer entity or other relevant details
 
 details:
-Before the kill, _node.onKill()_ handler
+Before the kill, _node.onKill(st)_ handler
 will be called if present.
 
-If the *node* has a _kill()_ function it will be called
+If the *node* has a _kill(st)_ function it will be called
 to do some custom clean up actions.
 It is usually defined for objects in the pool,
 when we don't want to detach a killed object

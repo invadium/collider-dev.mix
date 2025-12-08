@@ -349,14 +349,14 @@ head: draw an image
 usage: (img: Image, x:number, y:number, [w, h, [dx, dy, dw, dh]])
 types:
     @param {Image} image - any image-compatible object
-    @param {number} x
-    @param {number} y
-    @param {number} w
-    @param {number} h
-    @param {number} dx
-    @param {number} dy
-    @param {number} dw
-    @param {number} dh
+    @param {number} x - image top-left corner horizontal coordinate
+    @param {number} y - image top-left corner vertical coordinate
+    @param {number} w - image width
+    @param {number} h - image height
+    @param {number} sx - the horizontal coordinate of the subimage top-left
+    @param {number} sy - the vertical coordinate of the subimage top-left
+    @param {number} sw - the width of the subimage
+    @param {number} sh - the height of the subimage
 
 details:
 
@@ -374,6 +374,42 @@ There are multiple ways you can apply parameters
     // to the specified rectangular area
     // on the canvas (at 0x0, size 150x150)
     image(img, 20, 20, 40, 40, 0, 0, 150, 150)
+
+-------------------------------------------------------------------
+/alt/sprite
+tags: draw, context, 2d
+head: draw a sprite image centered at the provided coordinates
+usage: (img: Image, x:number, y:number, [w, h, [dx, dy, dw, dh]])
+types:
+    @param {Image} image - any image-compatible object
+    @param {number} x - the horizontal coordinate where to center the image
+    @param {number} y - the vertical coordinate where to center the image
+    @param {number} w - image width
+    @param {number} h - image height
+    param {number} sx - the horizontal coordinate of the subimage top-left
+    @param {number} sy - the vertical coordinate of the subimage top-left
+    @param {number} sw - the width of the subimage
+    @param {number} sh - the height of the subimage
+
+details:
+
+Just like a regular image() function or Canvas 2D context.drawImage(),
+but instead of specifying top-left image corner, one have to specify the image center point.
+
+There are multiple ways you can apply parameters:
+
+    // center at the provided coordinates with natural width/height
+    sprite(img, 200, 200) 
+
+    // draw at coordinates and stretch to the specified width and height
+    sprite(img, 200, 200, 100, 50) 
+
+    // specify a subimage of the original image object
+    // (e.g. at 120x80 a rectangular subimage 40x40)
+    // and render that subimage in the center
+    // of specified coordinates with provided dimensions
+    // (e.g. at 240x200 stretch the subimage to 80x60 rectangle)
+    sprite(img, 240, 200, 80, 60, 120, 80, 40, 40)
 
 -------------------------------------------------------------------
 /alt/rgb
