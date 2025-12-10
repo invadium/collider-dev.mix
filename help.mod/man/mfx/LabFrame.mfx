@@ -231,10 +231,23 @@ head: pick nodes at local coordinates
 types:
     @param {number} x - local x
     @param {number} y - local y
-    @param {array} ls - an array to collect picked nodes
-    @param {object|function} [opt] - an option object or a predicate function
+    @param {array} *list - an optional array to collect picked nodes or a predicate function if missing
+    @param {function} *predicate - an optional predicate function to test nodes against
 details:
-Methods determines the pick by coordinates and size convention.
+The exact pick method is determined by the coordinates and size convention
+(e.g. [x, y, w, h] for rectangular objects or [x, y, r] for the circular ones)
+or can be implemented with a custom compatible pick(x, y, list, predicate) method.
 
-But a node can implement it's own peek method
+Typically used to pick an object under the mouse cursor:
+
+    const selectedNode = lab.pick(mouse.x, mouse.y)
+
+This returns the last found node, to collect multiple nodes potentially under the cursor,
+provide the list:
+
+    const ls = []
+    lab.pick(mouse.x, mouse.y, ls)
+
+    // provide a predicate function to pick only the enemies
+    lab.pick(mouse.x, mouse.y, ls, e => e instanceof dna.Enemy)
 
