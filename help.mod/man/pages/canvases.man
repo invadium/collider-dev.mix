@@ -6,13 +6,13 @@ To display output, *Collider.JAM* needs rendering surfaces.
 We use one or multiple HTML5 canvases for this purpose.
 Usually, there is no need to specify them manually,
 *Collider.JAM* creates and manages canvases automatically.
-By default, *Collider.JAM* setups two canvases - 
-one for the Canvas API and another for WebGL context.
-Both are visible at the same time with the 2D canvas
+Two canvases are created by default - 
+one for the Canvas 2D API and another for the WebGL context.
+Both are visible at the same time, with the 2D canvas
 located as an overlay in front of the WebGL canvas.
 
 
-=== Canvas API and WebGL Dichotomy
+== Canvas 2D and WebGL API Dichotomy
 
 A canvas is a versatile HTML5 element that allows us to draw
 graphics on a web page.
@@ -32,33 +32,96 @@ There are also legacy "webgl-experimental" and "webgl"
 we don't use since currently WebGL2 is widely supported
 in modern browsers. There is also a perspective "webgpu"
 that promises much better performance than WebGL,
-but it is still a candidate recommendation and not a standard.
+but it is still a candidate recommendation and not a standard (as of early 2026).
 We prefer to work with super-stable, well-documented and
 deeply understood Canvas and WebGL APIs, leaving WebGPU
 integration for the future.
 
-=== Why Two APIs?
+
+
+== Why Two APIs?
 
 One might ask why do we have to bother with 2 different API?
 Just pick one and move on.
 
-Unfortunatelly, there is no particular winner.
+Unfortunately, when it comes to graphical APIs in the browser, there is no particular winner.
 Both Canvas 2D API and WebGL are good and flexible APIs
 with decent performance and hardware acceleration.
 
 We prefer Canvas 2D API for vercatile vector and bitmap graphics.
-It provides a rich set of 2D drawing operations and includes out-of-the-box
-support for advanced features like vector fonts and SVG rendering.
+It provides a rich set of 2D drawing operations and includes out-of-the-box support for advanced features like vector fonts and SVG rendering.
 Something, that is completely missing in the WebGL API.
 
-WebGL, on the other hand, is a much more low-level API
+WebGL, on the other hand, is a lower-level API
 that gives you finer control over the rendering pipeline.
-It is much preferable when we deal with 3D graphics, post-processing effects
-and anywhere where performace could be an issue.
+It is more preferable when dealing with 3D graphics, post-processing effects and anything where performance could be an issue.
 
-*Collider.JAM* provides convenient wrappers and tools to streamline both
-APIs usage. But doesn't fully unify them since usage patterns for both APIs
-are totally different and unification might create unnecessary bottlenecks
-with little advantage.
+*Collider.JAM* provides convenient wrappers and tools to streamline both APIs usage. But doesn't fully unify them since usage patterns for both APIs are totally different and unification might create unnecessary bottlenecks with little advantage.
+
+
+== Canvas Scenarios
+
+=== Single Rendering Target
+
+The most basic scenario is when we need a single rendering surface for Canvas API or WebGL2.
+
+Since *Collider.JAM* has already created default canvases there is no need for any additional configuration. Just use ctx or gl object to access the corresponding API.
+
+=== WebGL Scenery with Canvas UI Overlay
+
+Let's assume we want to create a 3D game. Or maybe it is a 2D, but we want to render a lot of entities. WebGL is the ideal API for that. But it is not as great when it comes to rendering fonts for the game's HUD. We have to use prerendered bitmap fonts for that or maybe arrange text drawing to an off-screen 2D canvas and then render the result as a texture in the 3D view.
+
+There is no need to do that. Since the HUD elements are always in front of the game scenery, we can render them to the front 2D canvas. Be sure to clear the canvas first, so unoccupied areas will be transparent and you can see the WebGL canvas through.
+
+By default, the WebGL canvas has "z-index: 5" and the 2D canvas has "z-index: 7". So there is no need for any additional configs - the 2D rendering surface is already in front of the 3D one.
+
+
+=== 2D Background + WebGL + 2D HUD
+
+A more complex scenario is when we want to have an additional 2D background. Maybe it is a 2D game with a complex scrolling parallax background sourced from a bunch of SVG images. We can't render SVG in WebGL, but it is straightforward through the Canvas API.
+
+This scenario requires a 3rd canvas, so we can't manage with the default config.
+
+A common solution for this problem in *Collider.JAM* is to create a buffered mod (the one with a separate canvas) and then place the created 2D canvas in the same container with a lower z-index (say "z-index: 3"). It gives 3 layers visible at the same time - a fully-filled 2D background + partially transparent WebGL scenery + partially transparent 2D HUD. The last 2 were created by default and one was created by a buffered mod and configured and placed manually.
+
+
+=== Buffered MODs
+
+There are many scenarios where we want additional rendering surfaces. They can be used as additional layers for the main screen or a low-resolution off-screen buffer to simulate a retro-console look. Or maybe we want a full-resolution off-screen rendering buffer to render it as a texture to the main screen while applying various post-effect shaders.
+
+The easiest way to create a buffered mod, just add the _"-buf"_ suffix to the name. For example, name the mod like _"background-buf.mod"_.
+This automatically creates off-screen buffered canvases.
+
+Using an additional suffix could be cumbersome, so for more complex cases, when we need frequent access to such a buffered mod, use dirrect configuration - place _config.json_ inside the mod with "buffered" flag enabled:
+
+    {
+        "buffered": true
+    }
+
+This will have the same result, but now you can name the mod simply as _background.mod_. Access buffered canvas and context with:
+
+    mod.background.canvas  // additional off-screen 2D canvas
+    mod.background.ctx     // 2D canvas context
+Set the resolution manually in any of mod's _setup_ functions or dynamically recalculate the resolution in _/trap/resize()_ handler.
+
+The buffered canvas can be placed on the page by attaching it to the rendering surface <div> with the desired "z-index". Or, alternatively, can be directly drawn with the regular image() function.
+
+
+== Adjusting Size and Position
+
+A canvas object can have an optional adjust() method to fix its size and position. It gets triggered at the start of the game loop and every time the browser window changes size.
+
+*Collider.JAM* augments 2 default canvases with _sys/adjustableCanvasTrait_, so they automatically fill the browser window. To emulate the same behavior in buffered canvases, augment them with this trait:
+
+    augment(mod.buffered.canvas, sys.adjustableCanvasTrait)
+This will adjust the size of buffered canvases each time the browser window changes the size.
+
+Or you can reimplement adjust() with custom logic.
+
+Note that any changes to canvas size MUST be copied to context _width_ and _height_ properties by adjust() for convenience.
+
+
+
+
 
 
