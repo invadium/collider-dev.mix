@@ -24,15 +24,13 @@ There are multiple graphics APIs available for the canvas components.
 We can select them by requesting a corresponding drawing context
 from the canvas element.
 
-When "2d" context is requested, we are getting access
+When a "2d" context is requested, we get access
 to the 2D Canvas API.
 
-When "webgl2" context is requested, we can use WebGL2 API.
-There are also legacy "webgl-experimental" and "webgl"
-we don't use since currently WebGL2 is widely supported
-in modern browsers. There is also a perspective "webgpu"
-that promises much better performance than WebGL,
-but it is still a candidate recommendation and not a standard (as of early 2026).
+When a "webgl2" context is requested, we can use the WebGL2 API.
+There are also legacy "webgl" and "webgl-experimental" options used as a WebGL 1.0 backup, but those are rarely used, since WebGL 2.0 support is ubiquitous by now.
+
+There is also a perspective "webgpu" that promises much better performance than WebGL, but it is still a candidate recommendation and not a standard (as of early 2026).
 We prefer to work with super-stable, well-documented and
 deeply understood Canvas and WebGL APIs, leaving WebGPU
 integration for the future.
@@ -41,22 +39,22 @@ integration for the future.
 
 == Why Two APIs?
 
-One might ask why do we have to bother with 2 different API?
+One might ask why we have to bother with 2 different API?
 Just pick one and move on.
 
 Unfortunately, when it comes to graphical APIs in the browser, there is no particular winner.
 Both Canvas 2D API and WebGL are good and flexible APIs
 with decent performance and hardware acceleration.
 
-We prefer Canvas 2D API for vercatile vector and bitmap graphics.
+We prefer Canvas 2D API for versatile vector and bitmap graphics.
 It provides a rich set of 2D drawing operations and includes out-of-the-box support for advanced features like vector fonts and SVG rendering.
-Something, that is completely missing in the WebGL API.
+Something that is completely missing in the WebGL API.
 
 WebGL, on the other hand, is a lower-level API
 that gives you finer control over the rendering pipeline.
 It is more preferable when dealing with 3D graphics, post-processing effects and anything where performance could be an issue.
 
-*Collider.JAM* provides convenient wrappers and tools to streamline both APIs usage. But doesn't fully unify them since usage patterns for both APIs are totally different and unification might create unnecessary bottlenecks with little advantage.
+*Collider.JAM* provides convenient wrappers and tools to streamline usage of both APIs. But it doesn't fully unify them since usage patterns for both APIs are totally different and unification might create unnecessary bottlenecks with little advantage.
 
 
 == Canvas Scenarios
@@ -89,22 +87,24 @@ A common solution for this problem in *Collider.JAM* is to create a buffered mod
 
 There are many scenarios where we want additional rendering surfaces. They can be used as additional layers for the main screen or a low-resolution off-screen buffer to simulate a retro-console look. Or maybe we want a full-resolution off-screen rendering buffer to render it as a texture to the main screen while applying various post-effect shaders.
 
-The easiest way to create a buffered mod, just add the _"-buf"_ suffix to the name. For example, name the mod like _"background-buf.mod"_.
-This automatically creates off-screen buffered canvases.
+The easiest way to create a buffered mod is to add the _"-buf"_ suffix to the name. For example, name the mod like _"background-buf.mod"_.
+This automatically creates off-screen buffered canvases for Canvas 2D and WebGL APIs. If only a 2D buffered canvas needed, the "-2d" suffix can be used. And the "-gl" suffix will create a WebGL buffered context.
 
-Using an additional suffix could be cumbersome, so for more complex cases, when we need frequent access to such a buffered mod, use dirrect configuration - place _config.json_ inside the mod with "buffered" flag enabled:
+Using an additional suffix could be cumbersome, so for more complex cases, when we need frequent access to such a buffered mod, use direct configuration - place _config.json_ inside the mod with "buffered" flag enabled:
 
     {
-        "buffered": true
+        "buffered":   true,  // create both 2D and WebGL canvas buffers
+        "buffered2d": true,  // create only 2D canvas buffer
+        "bufferedGL": true,  // create only WebGL canvas buffer
     }
-
 This will have the same result, but now you can name the mod simply as _background.mod_. Access buffered canvas and context with:
 
     mod.background.canvas  // additional off-screen 2D canvas
     mod.background.ctx     // 2D canvas context
 Set the resolution manually in any of mod's _setup_ functions or dynamically recalculate the resolution in _/trap/resize()_ handler.
 
-The buffered canvas can be placed on the page by attaching it to the rendering surface <div> with the desired "z-index". Or, alternatively, can be directly drawn with the regular image() function.
+The buffered canvas can be placed on the page by attaching it to the rendering surface *&lt;div&gt;* with the desired "z-index". Or, alternatively, can be directly drawn with the regular image() function.
+
 
 
 == Adjusting Size and Position
@@ -119,9 +119,4 @@ This will adjust the size of buffered canvases each time the browser window chan
 Or you can reimplement adjust() with custom logic.
 
 Note that any changes to canvas size MUST be copied to context _width_ and _height_ properties by adjust() for convenience.
-
-
-
-
-
 

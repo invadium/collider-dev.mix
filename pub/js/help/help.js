@@ -35,6 +35,12 @@ const themeNames = themeData.filter((e, i) => i % 2 === 1)
 
 var state = {}
 
+window.help = {
+    env,
+    cache,
+    state,
+}
+
 function print(content) {
     const help = document.getElementById('help')
     help.innerHTML += content
