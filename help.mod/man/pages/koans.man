@@ -1,20 +1,20 @@
-name: Koans
+name: Kōans
 tags: intro, start, design, tips, philosophy
 -----------
 
-_Everything is in its right place_
+=== Everything is in its right place
 
-_A node in /lab lives and evolves_
+=== A node in /lab lives and evolves
 
-_A node in /dna can be spawn_
+=== A node in /dna can be spawn
 
-_It's just plain js objects and some conventions_
+=== It's just plain js objects and some conventions
 
-_File system folders are reflected on the scene_
+=== File system folders are reflected on the scene
 
-_Methods init(), evo(dt) and draw() is all you need for en entity_
+=== Methods init(), evo(dt) and draw() is all you need for en entity
 
-_Events are trapped in /trap_
+=== Events are trapped in /trap
 
-_Know your scope_
+=== Know your scope
 

@@ -382,8 +382,24 @@ types:
     @returns {number} - a value mapped to [targetStart..targetStop] range
 
 details:
-Swap the target start and stop values to reverse the mapping,
+Hint: swap the target start and stop values to reverse the mapping,
 e.g. remap(0.25, 0, 1, 1, 0) => 0.75
+
+-------------------------------------------------------------------
+/alt/cmap
+
+head: remap and clamp the *val* from *start*..*stop* range to *targetStart*..*targetStop* range
+tags: math
+types:
+    @param {number} val - a value to map
+    @param {number} start - a start value of the original range
+    @param {number} stop - a stop value of the original range
+    @param {number} targetStart - a start value of the target range
+    @param {number} targetStop - a stop value of the target range
+    @returns {number} - a value mapped to [targetStart..targetStop] range
+
+details:
+Similar to _remap()_, but clamps the values to the [targetStart..targetStop] range.
 
 -------------------------------------------------------------------
 /alt/distance
