@@ -23,6 +23,60 @@ types:
 details:
 ry(.5) - returns half of the canvas height.
 -------------------------------------------------------------------
+/alt/rb
+tags: draw, context, 2d
+head: relative base(can be width or height - which is smaller)
+coordinate, where *n* sets the base position between [0..1]
+types:
+    @param {number} n - relative base length between [0..1]
+    @returns {number} - absolute screen-space distance in pixels
+details:
+rb(.25) - returns quarter width when in the portrait mode and
+quarter height when in the landscape mode.
+Useful in calculation of relative component sizes and positioning,
+since the full base is guaranteed to fit the screen both vertically
+and horizontally.
+-------------------------------------------------------------------
+/alt/px
+tags: draw, context, 2d
+head: relative x coordinate, where *n* sets the horizontal screen
+position in percentage between [0..100]
+types:
+    @param {number} n - relative canvas width in percentage between [0..100]
+    @returns {number} - horizontal screen-space coordinate in pixels
+details:
+px(25) - returns a quarter of the canvas width.
+
+The same, as rx(), but uses percentage instead of the normalize [0..1] unit value.
+-------------------------------------------------------------------
+/alt/py
+tags: draw, context, 2d
+head: relative y coordinate, where *n* sets the vertical screen
+position in percentage between [0..100]
+types:
+    @param {number} n - relative canvas height in percentage between [0..100]
+    @returns {number} - vertical screen-space coordinate in pixels
+details:
+py(25) - returns a quarter of the canvas height.
+
+The same, as ry(), but uses percentage instead of the normalize [0..1] unit value.
+-------------------------------------------------------------------
+/alt/pb
+tags: draw, context, 2d
+head: relative base(can be width or height - which is smaller)
+coordinate, where *n* sets the base position in percentage between [0..100]
+types:
+    @param {number} n - relative base length in percentage between [0..100]
+    @returns {number} - absolute screen-space distance in pixels
+details:
+pb(25) - returns quarter width when in the portrait mode and
+quarter height when in the landscape mode.
+Useful in calculation of relative component sizes and positioning,
+since the full base is guaranteed to fit the screen both vertically
+and horizontally.
+
+The same, as rb(), but uses percentage instead of the normalize [0..1] unit value.
+-------------------------------------------------------------------
 /alt/save
 tags: draw, context, 2d
 head: save current drawing context state
@@ -182,6 +236,16 @@ head: draw a rectangle
 types:
     @param {number} x - top-left x coordinate
     @param {number} y - top-left y coordinate
+    @param {number} w - width
+    @param {number} h - height
+details: Use stroke() or fill() to set the mode and color.
+-------------------------------------------------------------------
+/alt/block
+tags: draw, context, 2d
+head: draw a centered rectangle
+types:
+    @param {number} x - center x coordinate
+    @param {number} y - center y coordinate
     @param {number} w - width
     @param {number} h - height
 details: Use stroke() or fill() to set the mode and color.

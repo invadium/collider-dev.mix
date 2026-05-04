@@ -385,6 +385,18 @@ details:
 Convenient to use with *await* in an *async* function.
 
 -------------------------------------------------------------------
+/alt/emit
+head: emit the event in /lab
+types:
+    @param {string} name - the name of the event
+    @param {object} event - an optional event object with event data
+
+details:
+It is a shortcut to calling lib.emit().
+It will look for any node with the on[EventName] function defined
+and call that function with [event] object as a parameter.
+
+-------------------------------------------------------------------
 /alt/print
 head: output a line on the text console
 types:
@@ -479,6 +491,11 @@ Has a number of refinement functions for convenience:
     assert.empty(...)
     assert.notEmpty(...)
 The interface is the same as in assert(condition, message).
+
+/alt/dir
+head: dump the provided value to the debug console
+types:
+@param {value} target - a target to dump
 
 /alt/$$
 head: select from root context
