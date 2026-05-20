@@ -175,17 +175,27 @@ String predicates are in path format and can include special characters:
 
     * - match all children
     ^ - match the tag
-    #<id> - deep select by <id>
-    &<name> - deep select by <name>
-    ~<type> - deep select by <type>
+    #<id> - deep select by &lt;id&gt;
+    &<name> - deep select by &lt;name&gt;
+    .<type> - deep select by &lt;type&gt;
 
 Some usage examples:
 
     $.select('/res/sfx/*')           // select all sound effects in sfx
     dna.select('hud/Window')         // select hud.Window
-    lab.hud.select('~Window')        // select all instances of dna.hud.Window in lab.hud
-    lab.hud.select('panelA/~Window') // select all instances of dna.hud.Window under panelA
+    lab.hud.select('.Window')        // select all instances of dna.hud.Window in lab.hud
+    lab.hud.select('panelA/.Window') // select all instances of dna.hud.Window under panelA
     lab.select('&hero')              // select from lab all nodes with name === 'hero'
+
+-------------------------------------------------------------------
+/sys/Frame/prototype/locate
+head: select a single node matching the string or function predicate
+types:
+@param {string} predicate
+details:
+The same, as select(), but returns the top result.
+
+Look at [select()](#./sys/Frame/select) for predicate syntax details.
 
 -------------------------------------------------------------------
 /sys/Frame/prototype/selectOne
@@ -199,9 +209,9 @@ Look at [select()](#./sys/Frame/select) for predicate syntax details.
 
 -------------------------------------------------------------------
 /sys/Frame/prototype/selectInstancesOf
-head: returns the list of included nodes of provided type
+head: deep select of nodes matching the provided type
 types:
-@param {prototype} of - a value to match instanceof
+@param {prototype} of - a value to match with instanceof
 
 -------------------------------------------------------------------
 /sys/Frame/prototype/map
