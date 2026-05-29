@@ -2,8 +2,8 @@ module.exports = function(e) {
     if (e.repeat) return
 
     if (__$.hidden) {
-        lib.control.show()
+        lib.control.open()
     } else {
-        lib.control.hide()
+        lib.control.close()
     }
 }

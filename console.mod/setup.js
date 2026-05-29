@@ -34,6 +34,9 @@ module.exports = function setup() {
             this.w = ctx.width
             this.h = ctx.height/2
         },
+        close: function() {
+            lib.control.close()
+        },
     })
 
     function print(msg) {
@@ -54,6 +57,7 @@ module.exports = function setup() {
         const words = cmd.split(' ')
         if (words.length === 0) return
         const command = words[0]
+        words.line = cmd
 
         // find a function
         let fn = getGlobal(command)
@@ -61,7 +65,7 @@ module.exports = function setup() {
 
         if (fn) {
             try {
-                const res = fn(words, cmd, con)
+                const res = fn.call(this, words, cmd, con)
                 if (res) con.print(res)
             } catch (e) {
                 con.print(e)
@@ -86,5 +90,6 @@ module.exports = function setup() {
             }
         }
     }
+
 }
 

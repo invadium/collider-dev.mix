@@ -10,8 +10,8 @@ function trapNode(args, line, con) {
     }
     const params = args.slice(1)
 
-    // need to hide to enable the root mod
-    lib.control.hide()
+    // need to close the console to enable the root mod
+    lib.control.close()
 
     $.trap.echo.apply($.trap, params)
 }
