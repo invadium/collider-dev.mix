@@ -10,6 +10,7 @@ function open() {
 function close() {
     __$.enableOthers()
     lab.hud.releaseFocus(lab.hud.console)
+    lab.hud.console.resetHistory()
     lab.hud.console.hide()
     __$.hide()
 }
