@@ -1,5 +1,6 @@
 'use strict'
 
+/*
 function getLocal(name) {
     if (!isFrame(__$.cmd)) return
 
@@ -15,6 +16,7 @@ function getGlobal(name) {
     if (!isFun(fn)) return
     return fn
 }
+*/
 
 module.exports = function setup() {
     __$.hide()
@@ -51,6 +53,20 @@ module.exports = function setup() {
     sys.after($.log, 'err', (msg, more) => print('! ' + msg + (more? more : '')))
     sys.after($.log, 'dump', (obj) => { print(obj) })
 
+    con.lookupList = []
+    if (isFrame($.cmd)) con.lookupList.push($.cmd)
+    if (isFrame(__$.cmd)) con.lookupList.push(__$.cmd)
+
+    con.locateCommand = function(name) {
+        const ls = this.lookupList
+
+        for (let i = 0; i < ls.length; i++) {
+            const frame = ls[i]
+            const fn = frame._dir[name]
+            if (isFun(fn)) return fn
+        }
+    }
+
     // define command processing
     con.onCommand = function(cmd) {
         if (!cmd) return
@@ -59,9 +75,7 @@ module.exports = function setup() {
         const command = words[0]
         words.line = cmd
 
-        // find a function
-        let fn = getGlobal(command)
-        if (!fn) fn = getLocal(command)
+        const fn = this.locateCommand(command) || this.locateCommand('_default')
 
         if (fn) {
             try {
@@ -73,21 +87,7 @@ module.exports = function setup() {
             }
 
         } else {
-            // check default handler
-            fn = getGlobal('_default')
-            if (!fn) fn = getLocal('_default')
-
-            if (fn) {
-                try {
-                    const res = fn(words, cmd, con)
-                    if (res) con.print(res)
-                } catch (e) {
-                    con.print(e)
-                    console.error(e)
-                }
-            } else {
-                con.print('unknown command: [' + command + ']')
-            }
+            con.print('unknown command: [' + command + ']')
         }
     }
 

@@ -3,9 +3,10 @@
 function help(args, line, con) {
     con.print('available console commands:')
 
-    // list commands declared in global scope
-    if (sys.isFrame($.cmd)) {
-        const dir = $.cmd._dir
+    function listCommands(catalog) {
+        if (!catalog || !catalog._dir) return
+
+        const dir = catalog._dir
         Object.keys(dir).forEach(name => {
             const fn = dir[name]
             if (sys.isFun(fn)) {
@@ -16,17 +17,10 @@ function help(args, line, con) {
         })
     }
 
-    // list local commands declared in console.mod
-    if (sys.isFrame(__$.cmd)) {
-        const dir = __$.cmd._dir
-        Object.keys(dir).forEach(name => {
-            const fn = dir[name]
-            if (sys.isFun(fn)) {
-                const args = fn.args? ' ' + fn.args : ''
-                if (sys.isString(fn.info)) con.print(name + args + ' - ' + fn.info)
-                else con.print(name)
-            }
-        })
+    const lookupList = this.lookupList
+    for (let i = 0; i < lookupList.length; i++) {
+        const catalog = lookupList[i]
+        listCommands(catalog)
     }
 
     con.print('-------------------------------------------------')
