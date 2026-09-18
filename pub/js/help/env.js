@@ -1,7 +1,8 @@
 export const env = {
 
     config: {
-        itheme: 0,
+        itheme:    0,
+        showPanel: true,
     },
 
     debug: false,

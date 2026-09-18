@@ -264,7 +264,9 @@ function setup() {
     }
 
     loadMeta()
-    normalSplit()
+    // the panel state drives the split lifecycle, so it is restored
+    // here rather than in applyConfig(), which runs before onload
+    showPanel(env.config.showPanel !== false, true)
 }
 
 function scrollTo(elementId) {
@@ -311,8 +313,12 @@ function syncHash() {
     }
 }
 
+// the live split.js instance, or null when the index panel is hidden
+var split = null
+
 function normalSplit() {
-    Split(['#tagsPanel', '#rightPanel'], {
+    if (split) return
+    split = Split(['#tagsPanel', '#rightPanel'], {
         sizes: [27, 73],
         minSize: [150, 300],
         direction: 'horizontal',
@@ -320,37 +326,37 @@ function normalSplit() {
     })
 }
 
-function hiddenPanelSplit() {
-    /*
-    Split(['#rightPanel'], {
-        sizes: [100],
-        direction: 'horizontal',
-        gutterAlign: 'center',
-    })
-    */
-    const p = document.getElementById('rightPanel')
-    const h = document.getElementById('help')
-    p.style.float = 'center'
-    p.style.overflow = 'visible'
-    p.style.margin = 0
-    p.style.width = '99%'
-    p.style.border = '1px solid blue'
+function dropSplit() {
+    if (!split) return
+    // drops the gutter and the inline widths split.js has set
+    split.destroy()
+    split = null
+}
 
-    h.style.float = 'center'
-    h.style.width = '100%'
-    h.style.margin = 0
-    h.style.border = '1px solid red'
+function showPanel(on, noSave) {
+    const panel = document.getElementById('tagsPanel')
+    const right = document.getElementById('rightPanel')
+
+    if (on) {
+        panel.style.display = 'flex'
+        normalSplit()
+    } else {
+        // the split must go first - it owns the width of both panels
+        dropSplit()
+        panel.style.display = 'none'
+        right.style.width = '100%'
+    }
+
+    env.config.showPanel = on
+    if (!noSave) saveConfig()
 }
 
 function togglePanel() {
-    let e = document.getElementById('tagsPanel')
-    if (e.style.display === "none") {
-        e.style.display = "flex"
-        normalSplit()
-    } else {
-        e.style.display = "none"
-        hiddenPanelSplit()
-    }
+    showPanel(!isPanelShown())
+}
+
+function isPanelShown() {
+    return document.getElementById('tagsPanel').style.display !== 'none'
 }
 
 function switchTheme(itheme, noSave) {
@@ -411,7 +417,6 @@ window.onkeydown = function(e) {
                 break
 
             case 'F9':
-                // TODO fix layout switching
                 togglePanel()
                 break
         }

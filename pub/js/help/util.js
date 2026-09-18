@@ -69,7 +69,8 @@ export function loadConfig() {
     const savedConfig = localStorage.getItem('collider-help-config')
     if (!savedConfig) return false
 
-    env.config = JSON.parse(savedConfig)
+    // merged over the defaults, so options added later keep theirs
+    env.config = Object.assign({}, env.config, JSON.parse(savedConfig))
     console.log('=== Loaded Help Config ===')
     console.log(env.config)
     return true
