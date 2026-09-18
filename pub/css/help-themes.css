@@ -21,6 +21,11 @@
     --search-field-placeholder-color: #808080;
     --search-field-font-family:       nunito, serif;
 
+    --home-button-color:              #404040;
+    --home-button-hover-color:        #ffffff;
+    --home-button-background:         transparent;
+    --home-button-hover-background:   transparent;
+
     --tags-link-color:      #bd8c37;
     --tags-visited-color:   #bd8c37;
     --tags-hover-color:     #d4c26c;
@@ -98,6 +103,9 @@
     --search-field-color:             #cb4b16;
     --search-field-background-color:  #073642;
     --search-field-placeholder-color: #586e75;
+
+    --home-button-color:              #586e75;
+    --home-button-hover-color:        #cb4b16;
 
     --tags-panel-background:   #002b36;
     --tag-selected-background: #183a43;
@@ -212,6 +220,9 @@ $green:     #859900;
     --search-field-background-color:  #303540;
     --search-field-placeholder-color: #A0A0A0;
     --search-field-font-family:       pixel;
+
+    --home-button-color:              #ede19e;
+    --home-button-hover-color:        #ffffff;
 
     --page-title-color:       #4b80ca;
     --page-title-font-size:   150%;

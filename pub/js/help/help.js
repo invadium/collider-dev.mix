@@ -188,6 +188,26 @@ function setSearch(string) {
     location.hash = encodeURI(string)
 }
 
+/*
+ * Clear the search field and fall back to the neutral search.
+ * Bound to the home button and to Escape in a focused search field.
+ */
+function goHome() {
+    const field = document.getElementById(FIELD)
+
+    field.value = ''
+    setSearch('')
+    // the hash might be empty already - search directly, so
+    // a pending scheduled search is always dropped
+    search('')
+
+    // both panes keep their scroll position on re-render
+    document.getElementById('help').scrollTop = 0
+    document.getElementById('tags').scrollTop = 0
+
+    field.focus()
+}
+
 function update(data) {
     // TODO make meta processing more generic with recursive tree
     cache.updateData(data)
@@ -236,6 +256,8 @@ function setup() {
             scheduleSearch(field.value)
         }
     }
+
+    document.getElementById('homeButton').onclick = goHome
 
     if (!location.hash.startsWith('#.')) {
         field.value = decodeURI(location.hash.substring(1))
@@ -375,8 +397,7 @@ window.onkeydown = function(e) {
             case 'Escape':
 
                 if (document.activeElement === field) {
-                    field.value = ''
-                    setSearch('')
+                    goHome()
                 } else {
                     field.focus()
                 }
