@@ -6,6 +6,8 @@ import { cache } from './cache.js'
 import { find } from './filter.js'
 import { clear, render, wrapHtml, download, loadConfig, saveConfig } from './util.js'
 import { trap } from './trap.js'
+import { initMenu, toggleMenu, closeMenu, isMenuOpen, refreshMenu }
+    from './menu.js'
 
 
 const HELP_DATA_URL = '../help/data'
@@ -23,15 +25,13 @@ const DATA_MISSING = 'Missing help data!<br>'
 
 const UNABLE_TO_PARSE_DATA = `Unable to parse help data!`
 
-const themeData = [
-    'default',      'Default',
-    'solarized',    'Solarized',
-    'eclipsed',      'Eclipsed',
-    'dark',         'Dark',
-    'dark-pixel',   'Dark Pixel',
+const moods = [
+    { id: 'default',    name: 'Default'    },
+    { id: 'solarized',  name: 'Solarized'  },
+    { id: 'eclipsed',   name: 'Eclipsed'   },
+    { id: 'dark',       name: 'Dark'       },
+    { id: 'dark-pixel', name: 'Dark Pixel' },
 ]
-const themes = themeData.filter((e, i) => i % 2 === 0)
-const themeNames = themeData.filter((e, i) => i % 2 === 1)
 
 var state = {}
 
@@ -258,6 +258,7 @@ function setup() {
     }
 
     document.getElementById('homeButton').onclick = goHome
+    initMenu(menuItems)
 
     if (!location.hash.startsWith('#.')) {
         field.value = decodeURI(location.hash.substring(1))
@@ -359,27 +360,64 @@ function isPanelShown() {
     return document.getElementById('tagsPanel').style.display !== 'none'
 }
 
-function switchTheme(itheme, noSave) {
+function switchMood(itheme, noSave) {
     if (itheme === undefined) {
         itheme = (env.config.itheme || 0) + 1
-        if (itheme >= themes.length) itheme = 0
+        if (itheme >= moods.length) itheme = 0
     } else {
-        if (!Number.isInteger(itheme) || itheme < 0 || itheme >= themes.length) {
-            throw `Wrong theme index: ${itheme}`
+        if (!Number.isInteger(itheme) || itheme < 0 || itheme >= moods.length) {
+            throw `Wrong mood index: ${itheme}`
         }
     }
 
-    const themeId = themes[itheme]
-    const themeName = themeNames[itheme]
-    console.log(`mood: @${themeId} - [${themeName}]`)
-    document.documentElement.setAttribute('data-theme', themes[itheme])
+    const mood = moods[itheme]
+    console.log(`mood: @${mood.id} - [${mood.name}]`)
+    document.documentElement.setAttribute('data-theme', mood.id)
 
     env.config.itheme = itheme
     if (!noSave) saveConfig()
 }
 
+/*
+ * Export the rendered help content as a standalone page.
+ */
+function exportPage() {
+    const field = document.getElementById(FIELD)
+    const content = document.getElementById('help').innerHTML
+    const name = field.value !== ''? field.value : 'collider-help'
+
+    download(wrapHtml(content), name + '.html')
+}
+
+/*
+ * What the menu is made of. A new option is an entry here.
+ */
+const menuItems = [
+    {
+        id:      'mood',
+        type:    'choice',
+        title:   'Mood',
+        options: moods,
+        get:     () => env.config.itheme || 0,
+        set:     (i) => switchMood(i),
+    },
+    {
+        id:    'panel',
+        type:  'toggle',
+        title: 'Index Panel',
+        get:   () => isPanelShown(),
+        set:   (on) => showPanel(on),
+    },
+    {
+        id:    'export',
+        type:  'action',
+        title: 'Export Page',
+        run:   () => exportPage(),
+    },
+]
+
 function applyConfig() {
-    switchTheme(env.config.itheme, true)
+    switchMood(env.config.itheme, true)
 }
 
 window.onload = setup
@@ -394,7 +432,8 @@ window.onkeydown = function(e) {
     if (e.ctrlKey) {
         switch(e.code) {
             case 'KeyM':
-                switchTheme()
+                switchMood()
+                refreshMenu()
                 break
         }
 
@@ -402,7 +441,9 @@ window.onkeydown = function(e) {
         switch(e.code) {
             case 'Escape':
 
-                if (document.activeElement === field) {
+                if (isMenuOpen()) {
+                    closeMenu()
+                } else if (document.activeElement === field) {
                     goHome()
                 } else {
                     field.focus()
@@ -410,10 +451,7 @@ window.onkeydown = function(e) {
                 break
 
             case 'F2':
-                let name = help
-                if (field.value !== '') name = field.value
-
-                download( wrapHtml(help.innerHTML), name + '.html')
+                exportPage()
                 break
 
             case 'F9':

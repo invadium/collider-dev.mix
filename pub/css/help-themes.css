@@ -26,6 +26,18 @@
     --home-button-background:         transparent;
     --home-button-hover-background:   transparent;
 
+    --menu-button-color:              #a0a0a0;
+    --menu-button-hover-color:        #C09020;
+    --menu-button-background:         transparent;
+
+    --menu-color:                     #404040;
+    --menu-background:                #ffffff;
+    --menu-shadow:                    rgba(0, 0, 0, 0.35);
+    --menu-section-color:             #166470;
+    --menu-section-font-family:       header;
+    --menu-item-hover-background:     #f0e8d0;
+    --menu-mark-color:                #C09020;
+
     --tags-link-color:      #bd8c37;
     --tags-visited-color:   #bd8c37;
     --tags-hover-color:     #d4c26c;
@@ -107,6 +119,16 @@
     --home-button-color:              #586e75;
     --home-button-hover-color:        #cb4b16;
 
+    --menu-button-color:              #586e75;
+    --menu-button-hover-color:        #cb4b16;
+
+    --menu-color:                     #657b83;
+    --menu-background:                #002b36;
+    --menu-shadow:                    rgba(0, 0, 0, 0.5);
+    --menu-section-color:             #268bd2;
+    --menu-item-hover-background:     #073642;
+    --menu-mark-color:                #b58900;
+
     --tags-panel-background:   #002b36;
     --tag-selected-background: #183a43;
     --tag-hover-background:    #073642;
@@ -170,6 +192,16 @@ $green:     #859900;
     --search-field-background-color:  #404550;
     --search-field-placeholder-color: #A0A0A0;
 
+    --menu-button-color:              #f8d8b5;
+    --menu-button-hover-color:        #ffffff;
+
+    --menu-color:                     #f8d8b5;
+    --menu-background:                #202530;
+    --menu-shadow:                    rgba(0, 0, 0, 0.5);
+    --menu-section-color:             #4b80ca;
+    --menu-item-hover-background:     #303540;
+    --menu-mark-color:                #d3a068;
+
     --page-title-color:       #4b80ca;
     --page-title-font-size:   36px;
     --page-title-font-family: header;
@@ -223,6 +255,17 @@ $green:     #859900;
 
     --home-button-color:              #ede19e;
     --home-button-hover-color:        #ffffff;
+
+    --menu-button-color:              #f8d8b5;
+    --menu-button-hover-color:        #ffffff;
+
+    --menu-color:                     #f8d8b5;
+    --menu-background:                #202530;
+    --menu-shadow:                    rgba(0, 0, 0, 0.5);
+    --menu-section-color:             #4b80ca;
+    --menu-section-font-family:       gameboy;
+    --menu-item-hover-background:     #303540;
+    --menu-mark-color:                #d3a068;
 
     --page-title-color:       #4b80ca;
     --page-title-font-size:   150%;
