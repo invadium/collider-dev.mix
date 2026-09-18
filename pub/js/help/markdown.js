@@ -532,7 +532,9 @@ function parse(md, nowrap) {
         // close open tags
         if (state.bold) out += '</b>'
         if (state.italic) out += '</i>'
+        if (state.mark) out += '</mark>'
         if (state.code) out += '</pre>'
+        if (state.quote) out += '</blockquote>'
 
         if (!nowrap) out += '</p>'
         return out

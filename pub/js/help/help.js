@@ -323,7 +323,7 @@ function hiddenPanelSplit() {
 function togglePanel() {
     let e = document.getElementById('tagsPanel')
     if (e.style.display === "none") {
-        e.style.display = "block"
+        e.style.display = "flex"
         normalSplit()
     } else {
         e.style.display = "none"
