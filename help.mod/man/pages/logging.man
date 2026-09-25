@@ -1,0 +1,64 @@
+name: Logging
+order: 201
+------------
+
+Logging is an invaluable feature of any complex software system.
+It is the simplest way to get introspection into a running program.
+Code leaves a text message trail that can be searched, filtered, and examined for troubleshooting.
+
+_Collider.JAM_ provides custom logging functions _log()_ and _dir()_ available in the global context. They are similar to the regular browser _console.log()_ and _console.dir()_, but allow certain customizations, e.g. when we want to redirect messages to other targets, maybe a custom debug console. Also, the standard log() implementation prints out ">" prefix to separate regular logging messages from the system messages printed out by Collider.JAM itself and messages from different log levels.
+
+The usage is the same, as methods of _console_, to print a message to the browser console:
+
+    log('debug message')
+
+To dump the object structure:
+
+    dir( player )
+
+You still can use regular _console.log()_ and _console.dir()_ with similar effect, but the above functions are more compact and allow more flexibility.
+
+The log function also contains a list of subfunctions to specify intent more precisely:
+
+    log.err('error message prefixed with "!"')
+    log.warn('warning message prefixed with "?"')
+    log.out('default message - the same as log(), prefixed with ">"')
+    log.debug('debug message prefixed with "."')
+    log.trace('trace message prefixed with ":"')
+
+Each type of log message will be marked with a unique prefix. If you want to drop prefixes and get behavior identical to console.log, just use the raw() function:
+
+    log.raw('message without prefixes')
+
+You can also dump an object:
+
+    // dump player object structure and values
+    log.dump( player )
+
+This is different from a plain _dir()_, since not only dumps the object structure, but prints out property values.
+
+Implement the player.dump() function returning a string if you want to customize the dump of a player.
+
+See [/log](#./log) for the full list of logging subfunctions.
+
+
+
+== Beware of Log Overflows
+
+The _Collider.JAM_ game loop runs 60 or more cycles per second (144 if run on a 144Hz screen). It is easy to overflood logs when logging each tick from multiple objects in the _/lab_.
+
+The browser dev tools have a filter that can help to pinpoint needed messages, but even with this feature you can overflow the browser with log messages to the point it becomes unresponsive.
+
+Sometimes, you'll have to kill the tab to stop the particularly heavy log stream.
+
+
+
+
+
+
+
+
+
+
+
+

@@ -33,41 +33,33 @@ tags: jam, intro, start, begin, beginner, preface, home
 
 _Version: {{ .version }}_
 
-_Collider.JAM_ is a hand-crafted JavaScript game framework for game jamming, creative coding, prototyping, and beyond.
+_Collider.JAM_ is a delightful JavaScript game framework hand-crafted for game jamming, prototyping, creative coding, indie game development, and beyond. It is tuned for nimble development with minimal noise.
 
-The development pipeline is based on the Web browser and JavaScript, but the code is portable and can target multiple
-platforms - Web, major desktops (macOS, Linux, and Windows), and mobile (Android and iOS).
-
-It is a fun way to prototype and create games.
-
-_Collider.JAM_ conceals rough JavaScript edges,
+It conceals rough _JavaScript_ edges and heavy APIs,
 turning development into a joyride.
-It is a pleasant way to learn JavaScript,
-since you don't have to deal with
-HTML, DOM, CSS, and MVC frameworks.
+_JavaScript_ is a pleasant language when you don't have to deal with _HTML_, _DOM_, _CSS_, and _nonsense frameworks_.
 
-It is a perfect tool to unlock your creativity
-and deliver the next great game.
 
-Installation intructions are available
-<a href="#.install">here</a>, the fastest way to install is:
+_Collider.JAM_ follows the web-first development model, but the code is portable across many platforms - web, desktops (_Linux_, _macOS_, and _Windows_), and mobile (_Android_ and _iOS_).
+
+_Collider.JAM_ is a perfect tool to unlock your creativity and deliver the next great game.
+
+Check out [the installation instructions](#.install).
+The best way to install is to run:
 
     npm i -g collider.jam
 
-To start, check out
-[Getting Started](#.getting-started).
+[Getting Started](#.getting-started) guides you on how to setup a new project and have something moving on the screen.
 
-The design of the framework is explored in
-[Design section](#.design)
+The design philosophy of the framework is explored in [the Design section](#.design).
 
-Collider.JAM keeps everything in the right place,
-so it is crucial to know the structure.
-Investigate [the root node](#./).
 
-Also, check out useful [tips](#.tips).
+Other sections worth checking:
 
-And [Start Jamming](#.start-jamming).
+* [the root node](#./) - covers the scene graph structure
+* [tips](#.tips)
 
+Explore [tutorials](#.tutorials) and [Start Jamming](#.start-jamming).
 <hr>
 
 <div style="font-size: 110%;">
@@ -78,4 +70,6 @@ And [Start Jamming](#.start-jamming).
 </div>
 
 <hr>
+
+
 
