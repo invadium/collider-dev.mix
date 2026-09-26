@@ -394,12 +394,13 @@ function exportPage() {
  */
 const menuItems = [
     {
-        id:      'mood',
-        type:    'choice',
-        title:   'Mood',
-        options: moods,
-        get:     () => env.config.itheme || 0,
-        set:     (i) => switchMood(i),
+        id:          'mood',
+        type:        'choice',
+        title:       'Mood',
+        collapsible: true,
+        options:     moods,
+        get:         () => env.config.itheme || 0,
+        set:         (i) => switchMood(i),
     },
     {
         id:    'panel',

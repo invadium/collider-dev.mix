@@ -418,3 +418,14 @@ blockquote {
     width:      1.2em;
     color:      var(--menu-mark-color);
 }
+
+.menuValue {
+    flex:        1 1 auto;
+    margin-left: 1.5em;
+    text-align:  right;
+    opacity:     0.6;
+}
+
+.menuSubItem {
+    padding-left: calc(16px + 1.2em);
+}
